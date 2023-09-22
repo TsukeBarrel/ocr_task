@@ -50,8 +50,8 @@ def ROI_detection(img):
         rect = cv2.boundingRect(cnt)
         rectangles.append(rect)
 
-        #y軸方向にソート。pandasを用いてCSV化するため、行ごとにセルをまとめる下準備
-        rectangles.sort(reverse=False, key=lambda x:x[1])
+    
+    rectangles.sort(reverse=False, key=lambda x:x[1])
 
     row_0 = copy.deepcopy(rectangles[0:7])
     row_1 = copy.deepcopy(rectangles[7:14])
@@ -114,6 +114,6 @@ if __name__ == "__main__":
         cropped_image = ROI_extraction(dilated_image)
         dilated_cropped_image = edge_extraction(cropped_image)
         table_list = ROI_detection(dilated_cropped_image)
-        apply_ocr(table_list, dilated_cropped_image)
+        apply_ocr(table_list, cropped_image)
         print('process finished')
 
